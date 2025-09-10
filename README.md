@@ -1,8 +1,6 @@
 # 🛠️ Ansible Deployment Setup
 
-**Project**: Ansible Deployment  
-**Date**: 17/04/2025  
-**Engineer**: Parvez M B  
+**Project**: Ansible Deployment    **Date**: 17/04/2025    **Engineer**: Parvez M B  
 **Email**: parvez@gallexyintelligentia.com  
 
 ---
