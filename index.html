@@ -1,0 +1,223 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WizardBrew Guide – Linux Cheat Sheet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="wizard-style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="profile-action-container">
+            <a href="https://github.com/WizardBrew" target="_blank" rel="noopener">
+                <img src="https://avatars.githubusercontent.com/u/91134716?v=4" alt="Profile Photo">
+            </a>
+            <button id="verifyBtn">🏷️ Verify Now Post</button>
+            <button id="notifyBtn">🔔 Notify New Post</button>
+        </div>
+        <h1>🐧 Linux Command Sheet </h1>
+        <div class="bubble-container">
+            <a href="https://devopsenginer.in" class="bubble">🌐 devopsenginer.in</a>
+            <a href="https://github.com/WizardBrew" class="bubble">🐙 GitHub</a>
+            <a href="https://www.linkedin.com/in/parvezmustak8004/" class="bubble">💼 LinkedIn</a>
+            <a href="mailto:wizardbrew@outlook.com" class="bubble">✉️ Email</a>
+        </div>
+    </header>
+
+    <main>
+    
+
+        <section class="step pink-step">
+            <h2>🛠️ Ansible Deployment Setup</h2>
+        
+            <p><strong>Project:</strong> Ansible Deployment &emsp; &emsp; &emsp;&emsp;&emsp;
+                <strong>Date:</strong> 17/04/2025 &emsp; &emsp; &emsp;&emsp;&emsp;
+                <strong>Engineer:</strong> Parvez M B &emsp; &emsp; &emsp;&emsp;&emsp;
+                <strong>Email:</strong> parvez@gal**intelli****.com
+            </p>
+        </section>
+
+        <section class="step">
+            <h2>📦 Step 1: Set Up the Virtual Machine</h2>
+            <ul>
+                <li>Create a VM on <strong>GCP</strong> or <strong>AWS</strong></li>
+                <li>OS: <strong>Ubuntu Server</strong></li>
+            </ul>
+            <pre><code>apt update && apt upgrade -y <br>
+                    apt install docker.io -y</code></pre>
+        </section>
+
+        <section class="step">
+            <h2>🐳 Step 2: Create Docker Containers</h2>
+            <code>
+                <p style="font-weight: 600;">--== Process ==-- </p>
+                <li>Ansible-master </li>
+                    <li>Target1:</li>
+                    <li>Target2:</li>
+            </code>
+            
+        
+            <code>
+            <p style="font-weight: 600;">--== Commands below ==-- </p>
+            docker run -it -d --name ansible-master ubuntu /bin/bash <br>
+            docker run -it -d --name target1 ubuntu /bin/bash<br>
+            docker run -it -d --name target2 ubuntu /bin/bash
+            docker ps</code></pre>
+        </section>
+
+        <section class="step">
+            <h2>📦 Step 3: Configure Ansible-Master Container</h2>
+            <code>  <p style="font-weight: 600;">--== Process ==-- </p>
+                    <li>Login to the container: </li>
+                    <li>Install required packages:</li>
+                    <li>Install Software Properties Common:</li>
+                    <li>Add Ansible Repository and Install Ansible:</li>
+                    <li>Install Ansible:</li>
+                    <li>Check Version to verify Ansible:</li>
+                        </code>
+            <code><p style="font-weight: 600;"> --== Commands below ==-- </p>
+            docker exec -it ansible-master bash
+                apt update<br>
+                apt install python-is-python3 vim iputils-ping openssh-client -y <br>
+                apt install software-properties-common<br>
+                add-apt-repository --yes --update ppa:ansible/ansible<br>
+                apt install ansible<br>
+                ansible --version</code>
+        </section>
+
+        <section class="step">
+            <h2>🎯 Step 4: Configure Target Machines</h2>
+            <h3>Target1 Setup</h3>
+            <code>
+                            <p style="font-weight: 600;">--== Process ==-- </p>
+                            <li>Login target1 container </li>
+                                <li>update the packages</li>
+                                <li>Install required packages like vim python3  & ping</li>
+                                <li>Install OpenSSH server and Client for interation.</li>
+                        </code>
+            <code>
+            <p style="font-weight: 600;">--== Commands below ==-- </p>
+            docker exec -it target1 bash <br>
+            apt update <br>
+            apt install vim python-is-python3 iputils-ping <br>
+            apt-get install openssh-client openssh-server -y</code></pre><br><br>
+            
+            <section>
+            <code> Note: YOu can either install pyton3 or the minimal and point it to pyton3 using <strong>python-is-python3</strong> </code>
+            </section>
+            
+        </section>
+
+            <section class="step">
+                <h3>🔗 SSH Configuration</h3>
+                <code>
+                        <p style="font-weight: 600;">--== Process ==-- </p>
+                        <li>Go to the directory of SSH </li>
+                        <li>Open sshd_congig file for changes</li>
+                        <li>Change the permission and allow Root Login 'Yes'</li>
+                        <li>Allow the Password Auth set it to 'Yes'</li>
+                        <li>Set the root password of the target machine</li>
+                </code>
+                <code>
+                
+                    <p style="font-weight: 600;">--== Process ==-- </p>
+                    cd /etc/ssh <br>
+                            vi sshd_config<br>
+                            PermitRootLogin yes <br>
+                            PasswordAuthentication yes <br>
+                            service ssh start
+                            passwd root</code>
+            </section>
+
+
+        <section class="step">
+            <h2>🌐 Step 5: Network & Host Setup</h2>
+            <code>
+            <p style="font-weight: 600;">--== Process ==-- </p>
+            <li>Find ip of docker or container # Get IP (e.g., 172.17.0.3)</li>
+            <li>Go back to the Master node and configure details</li>
+            <li> Go into ansible folder to configure in master </li>
+            <li>edit the host file in Inventory aff target ip to host file</li>
+            </code>            
+            <code>
+            <p style="font-weight: 600;">--== Commands below ==-- </p>
+            docker inspect target1  <br>
+            docker exec -it ansible-master bash <br>
+            cd /etc/ansible <br>
+            vi hosts
+            # Add:
+            172.17.0.3</code>
+            <br> <br>
+            <code>Note: you can either use cmd to find ip<aside>
+            <strong> hostname -i |
+            docker inspect target1 |
+            docker inspect -f '{{ .NetworkSettings.IPAddress }}' ContainerID </strong></aside></code>
+        </section>
+
+        <section class="step">
+            <h2>🔐 Step 6: SSH Key Setup</h2>
+            <pre>
+            <li> Create <strong>Keygen</strong> and transfer the ssh key using <strong>ssh-copy-id user@ip</strong>  to target machine. so you can ssh into it.</li>
+            <code>
+            ssh-keygen <br>
+ssh-copy-id root@172.17.0.3 <br>
+ssh root@172.17.0.3</code></pre>
+        </section>
+
+        <section class="step">
+            <h2>📜 Step 7: Create Ansible Playbook</h2>
+            <pre><code>#Go to the path  /etc/ansible/playbooknginx.yaml <br>
+            <code>
+- hosts: all <br> &emsp; &emsp;
+  tasks: <br> &emsp; &emsp; &emsp;
+    - name: Ensure nginx is installed <br> &emsp; &emsp; &emsp;&emsp;&emsp;
+      apt: 
+        name: nginx <br> &emsp; &emsp; &emsp;&emsp;&emsp;
+        state: latest <br>
+        </code>
+        </code></pre>
+
+        <section class="ansible-snippet">
+            <h2>🛠️ Install nginx using Ansible</h2>
+            <code> - hosts: all
+          tasks:
+            - name: Ensure nginx is installed
+              apt:
+                name: nginx
+                state: latest
+          </code>
+            <p>This task installs the latest version of <strong>nginx</strong> on all target hosts using the <code>apt</code>
+                module.</p>
+        </section>
+
+
+            <p>Run the playbook:</p>
+            <pre><code>ansible-playbook <strong>playbooknginx.yaml</strong></code></pre>
+        </section>
+
+        <section class="step">
+            <h2>🔁 Step 8: Repeat for Target2</h2>
+            <ul>
+                <li>Follow same steps as Target1</li>
+                <li>Update <code>/etc/ansible/hosts</code> with Target2 IP (e.g., <code>172.17.0.4</code>)</li>
+                <li>Run playbook again</li>
+            </ul>
+        </section>
+
+        <section class="step pink-step">
+            <h2>✅ Deployment Verified</h2>
+            <p>🎉 Ansible installed and configured across master and targets.</p>
+        </section>
+    </main>
+
+
+    <footer>
+        &copy; 2025 WizardBrew. All rights reserved | Contact- wizardbrew@outlook.com
+    </footer>
+</body>
+
+</html>
